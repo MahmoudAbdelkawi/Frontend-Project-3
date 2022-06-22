@@ -1,0 +1,501 @@
+@import './helper/mixin.scss';
+@import './helper/keyFrames';
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    scroll-behavior: smooth;
+}
+.container{
+    max-width: 1140px !important;
+        .itemNav{
+            position: relative;
+            &::before{
+            content:"";
+            position: absolute;
+            height: 5px !important;
+            background-color: blue;
+            width: 100%;
+            bottom:95%;
+            left: -100%;
+            transition: 0.5s;
+            }
+            overflow: hidden;
+        }
+        .itemNav:hover{
+            a{
+                color:blue !important;
+            }
+            &::before{
+                left: 0;
+                transition:0.5s;
+            }
+                background-color: #eee;
+                transition: 0.5s;
+        }
+    }
+    /*end of the navbar */
+main{
+    z-index: -1 !important;
+    position: relative;
+    top: -90px;
+    section{
+        position: relative;
+        div
+        {
+            img{
+            @include animationKeyFrame(movingUp,bottom,25%,bottom, 35%);
+            @include animation(movingUp,1s);
+            width: 600px;
+            height:378.5px;
+            position: relative;
+            bottom: 25%;
+            }
+        }
+        transform: skewY(5deg);
+        top: 100px;
+    }
+    padding-top: 150px;
+    padding-bottom: 150px;
+    background-color:#eee;
+    transform: skewY(-5deg);
+    overflow: hidden;       
+}
+
+/* end of the image */
+
+@keyframes movingUpDown {
+    0% {
+      top: 5px;
+    }
+    25%{
+        top: 30px;
+    }
+    50%{
+        top: 5px;
+    }
+    75%{
+        top: 30px;
+    }
+    100%{
+        top: 5px;
+    }
+}
+.arrow{
+    a{
+        bottom:50px;
+        .animation
+        {
+            animation:movingUpDown 2s infinite forwards;
+        }
+    }
+}
+
+/* end of the arrow */
+
+.hidden-img{
+    div{
+        img{
+            width:523px;
+            height:308px;
+        }
+    }
+    ul{
+        .border-edited{
+            padding-top: -15px !important;
+            border-bottom: 1px solid #888;
+        }
+    }
+}
+
+.up{
+    @include animationKeyFrame(show,bottom,18.5%,bottom,22%);
+    animation:show 0.5s forwards;
+    bottom:15.5%;
+}
+
+.ani{
+    @include animationKeyFrame(bg,width,0,width,18%);
+    content: "";
+    width:0;
+    height: 10%;
+    background-color:#eee;
+    position: absolute;
+    z-index: -1;
+    animation: bg 1s forwards;
+}
+
+.ani-bg{
+    &:hover::before{
+       @extend .ani;
+        left: 53.5%;
+    }
+    &2:hover::before{
+        @extend .ani;
+        left: 77.35%;
+    }
+}
+
+/* end of hidden section */
+
+.beforeAfter{
+        content: "";
+        background-color:rgb(0, 174, 255) !important;
+        width:15px;
+        height:15px;
+        border-radius:50% ;
+        position:absolute;
+        top: 35%;
+}
+.aniBeforeAfter
+{
+    transition: 1s;
+    height: 100%;
+    top: 0;
+    width: 50%;
+    z-index: -1;
+    border-radius:0;
+}
+.beforeAndAfter{
+    position: relative;
+    &::before{
+        @extend .beforeAfter;
+        left: -30%;
+    }
+    &::after{
+        @extend .beforeAfter;
+        left: 120%;
+    }
+    &:hover{
+        &::before{
+            left: 0;
+           @extend .aniBeforeAfter;
+        }  
+        &::after{
+            left: 50%;
+            @extend .aniBeforeAfter;
+        }
+        color: #fff !important;
+        transition:2.5s;            
+    }
+    transition:2.5s;            
+}
+
+.card{
+    &:hover{
+        transform:translateY(-15px);
+        transition:0.5s;
+        .card-body{
+            .arrowRight{
+                @include animationKeyFrame(right,transform,translateX(-5px),transform,translateX(10px));
+                @include animation(right,0.5s);
+
+            }
+        }
+    }
+    transition:0.5s;    
+}
+
+/* end of cards */
+
+@keyframes scale {
+    from{
+        transform:rotate(0);
+        width:325px;
+        height:325px;
+        bottom:0;
+        right: 0;
+    }   
+    to{
+        transform:rotate(10deg);
+        width:380px;
+        height:380px;
+        bottom:25px;
+        right: 20px;
+    } 
+}
+
+@keyframes galleryAni {
+    to{
+       
+        width:200%;
+        height:200%;
+    }
+}
+
+@keyframes rotate {
+    to{
+        transform:rotate(5deg) scale(1.1);
+    }
+}
+
+.big-border{  
+    .image{
+        position: relative;
+        overflow: hidden;
+        img {
+            max-width: 100%;
+            z-index: -1;
+        }
+        &::before{
+            content: "";        
+            background-color: #eee;
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            z-index: 1;
+            opacity: 0.2;
+        }
+        &:hover{
+            img{
+                animation:rotate 0.2s forwards;
+            }
+            &::before{
+                animation:galleryAni 0.7s;
+            }
+        }
+    }
+    
+}
+
+/* end of gallery */
+
+$className:bg-image;
+
+$colors:rgba(255,0,0, 0.5),rgba(0, 255, 0, 0.5),rgba(0, 0, 255, 0.5);
+$i:1;
+@each $color in $colors {
+    .feature#{$i}{
+
+        position: relative;
+        .#{$className}#{$i}
+        {
+            background: linear-gradient($color,$color),url(../images/features-0#{$i}.jpg) no-repeat scroll center;           
+            width: 100%;
+            height: 339px;
+            margin-bottom: 100px !important;
+            &::after{
+                content: "";
+                position: absolute;
+                top:12%;
+                left: -5%;
+                border-color: transparent transparent #fff transparent !important;
+                border-width:100px 200px 150px 350px  !important;
+                border-style: solid;
+                transition:0.2s;
+            }
+        }
+
+        border:2px solid #eee;
+        min-height: 100%;
+        p{
+            font-size: 20px;
+        }
+        hr{
+            width: 80px;
+            height: 5px !important;
+            color:$color;
+            opacity: 1 !important;
+        }
+        button{
+            &::before{
+                content: "";
+                position:absolute;
+                background-color: $color;
+                height:63px;
+                left: 36%;
+                bottom: 49px;
+                border-radius:5px;
+                width: 0px;
+                transition:0.2s;
+            }
+            font-size: 20px;
+        }
+        &:hover{
+            button{
+                &::before{
+                    width: 95px;
+                    z-index: -1 !important;
+                }
+                color: white !important;
+                z-index: 1 !important;
+            }
+            .#{$className}#{$i}
+            {
+                &::after{
+                    
+                    /*  border-color: transparent transparent #fff transparent !important; */
+                     border-width:100px 350px 150px 10px  !important;
+                     transition:0.2s;
+                 }
+            }
+            
+        }
+    }
+    $i:$i+1;
+    
+} 
+
+
+/* end of features */
+
+.bg-lighten{
+    background-color:#ececec !important;
+}
+
+
+.up-right{
+    
+    left: 68%;
+    bottom: 87%;
+    width:120px;
+    background-color:#ececec!important;
+    padding:15px;
+}
+
+.margin-top{
+    margin-top:100px !important;
+}
+
+
+/* end of TEST */
+
+
+.row{
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap:10%;
+    row-gap: 5%;
+    padding-bottom: 15px !important;
+    @for $i from 1 through 8{
+        .height#{$i}{
+            height: 500px;
+            .clearfix{
+                margin-top:50%;
+            }
+            
+            div:nth-child(1)
+            {
+                left: 90%;
+                top: 50%;
+                transform: translateY(-50%) !important;
+            }
+            div:nth-child(2)
+            {
+                top: 87%;               
+            }
+            &::before{
+                content:"";
+                position:absolute;
+                background: url(../images/team-0#{$i}.jpg) center no-repeat scroll;
+                background-size: cover;
+                height: 75%;
+                width: 85%;
+                transform:translate(-20%,15%);
+                border-radius: 15px;
+                z-index: 1;
+            }
+            &::after{
+                content:"";
+                height: 100%;
+                left: 100%;
+                background-color: rgba(185, 167, 167, 0.5);
+                position: absolute;
+                width: 0%;
+                opacity:0.5;
+                transition: 0.2s;
+                z-index: 0;
+
+            }
+            &:hover{
+                &::after{
+                    width:100%;
+                    left: 0;
+                }
+                &::before{
+                    content:"";
+                    position:absolute;
+                    background:linear-gradient(rgba(185, 167, 167, 0.5),rgba(185, 167, 167, 0.5)),url(../images/team-0#{$i}.jpg) center no-repeat scroll;
+                    background-size: cover;
+                    height: 75%;
+                    width: 85%;
+                    transform:translate(-20%,15%);
+                    border-radius: 15px;
+                    
+                }
+            }
+        }
+    }
+    margin-bottom: 200px !important;
+}
+
+/* end of team members */
+
+.scale-right{
+    transform:skew(-25deg) scale(1.5);
+    div{
+        transform:skew(25deg);
+    }
+    &:before{
+        content: "";
+        position: absolute;
+        left:100%;
+        top: 0%;
+        background-color:#888;
+        width: 25px !important;
+        height: 100%;
+        
+    }
+}
+.upper-color{
+    transition: 0.5s;
+    &::after{
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        background-color:blue;
+        transform: translate(-50%);
+        width: 0;
+        height: 2px;
+        transition: 0.5s;
+    }
+}
+.upper-color:hover{
+    transform: translateY(-5%);
+    position: relative;
+    &::after{
+        
+        width: 100%;
+        
+    }
+}
+
+/* end of services */
+
+.point-middle
+{
+    position: relative;
+    &:before{
+        content: "";
+        position: absolute;
+        transform:translate(-50%,-50%);
+        top: 50%;
+        left:50%;
+        background-color: #eee;
+        width: 0;
+        height: 0;
+        transition:0.5s;
+        opacity: 0.35;
+    }
+    &:hover::before{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* end of how it works */

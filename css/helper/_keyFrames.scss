@@ -1,0 +1,10 @@
+@mixin animationKeyFrame($animationName,$fromProperity,$fromValue,$toProperity,$toValue){
+    @keyframes #{$animationName} {
+        from{
+            #{$fromProperity}:$fromValue;
+        }   
+        to{
+            #{$toProperity}:$toValue;
+        } 
+    }
+}

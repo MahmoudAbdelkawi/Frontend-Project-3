@@ -1,0 +1,3 @@
+@mixin animation($animation,$time){
+    animation:$animation $time infinite alternate;
+}
